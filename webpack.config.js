@@ -14,7 +14,7 @@ module.exports = {
     },
 
     module: {
-        rules:[
+        rules: [
             {
                 test: /\.css/,
                 use: [
@@ -27,6 +27,24 @@ module.exports = {
                         // cssをjsに読み込む
                         loader: 'css-loader',
                     },
+                ],
+            },
+            // 画像
+            {
+                test: /\.(png|jpg)/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'images/[name].[ext]',
+                },
+                use: [
+                    // {
+                    //     loader: 'file-loader',
+                    //     options: {
+                    //         esModule: false,
+                    //         // ファイル名の指定
+                    //         name: 'images/[name].[ext]',
+                    //     },
+                    // },
                 ],
             },
         ],
