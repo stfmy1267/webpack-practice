@@ -1,12 +1,16 @@
 const path = require('path');
+// cssをファイルのバンドル＆作成するプラグイン
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+//　htmlファイルにcssを自動で書き込んでくれるプラグイン
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// distディレクトリを整理整頓するプラグイン{}はこの中のこの部分だけ使いますよの宣言
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/javascript/main.js',
     output: {
         path: path.resolve(__dirname, './dist/'),
-        filename: 'main.js',
+        filename: 'javascript/main.js',
     },
 
     module: {
@@ -20,6 +24,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                     },
                     {
+                        // cssをjsに読み込む
                         loader: 'css-loader',
                     },
                 ],
@@ -28,9 +33,14 @@ module.exports = {
     },
 
     plugins: [
-        new MiniCssExtractPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
+        // プラグインのインスタンス化
+        new MiniCssExtractPlugin({
+            // 出力ファイル名の指定
+            filename: './stylesheets/main.css'
         }),
+        new HtmlWebpackPlugin({
+            template: './src/template/index.html',
+        }),
+        new CleanWebpackPlugin(),
     ],
 }
