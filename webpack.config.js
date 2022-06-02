@@ -48,13 +48,17 @@ module.exports = {
                 ],
             },
             {
+                // .pugファイルのみを抽出
                 test: /\.pug/,
                 use: [
+                    // htmlをバンドル
                     {
                         loader: 'html-loader',
                     },
                     {
+                        // pugをhtmlにバンドル
                         loader: 'pug-html-loader',
+                        // 見やすくするオプション
                         options: {
                             pretty: true,
                         },
@@ -71,7 +75,11 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: './src/template/index.pug',
-            filename: 'template/indexe.html',
+            filename: 'template/index.html',
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/template/access.pug',
+            filename: 'template/access.html',
         }),
         new CleanWebpackPlugin(),
     ],
